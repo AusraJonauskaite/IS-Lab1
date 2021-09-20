@@ -1,6 +1,8 @@
 %For this lab. you need to have Image Processing Toolbox.
-
 %Classification using perceptron
+clear all
+clc
+
 % Reading apple images
 A1=imread('apple_04.jpg');
 A2=imread('apple_05.jpg');
@@ -80,7 +82,7 @@ w2 = randn(1);
 b = randn(1);
 
 % calculate weighted sum with randomly generated parameters
-%v1 = <...>; % write your code here
+v1 = x1*w1 + x2*w2 + b
 % calculate current output of the perceptron 
 if v1 > 0
 	y = 1;
