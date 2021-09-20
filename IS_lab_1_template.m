@@ -1,7 +1,8 @@
 %For this lab. you need to have Image Processing Toolbox.
+%Main lab part for 8 pts.
 %Classification using perceptron
-clear all
-clc
+clear all;
+clc;
 
 % Reading apple images
 A1=imread('apple_04.jpg');
@@ -80,8 +81,7 @@ T=[1;1;1;-1;-1];
 w1 = randn(1);
 w2 = randn(1);
 b = randn(1);
-n = 0.1;
-T_e = 0;
+Terr = 0;
 
 %Create cycle for all 5 inputs to 
 %calculate weighted sum with randomly generated parameters
@@ -95,13 +95,15 @@ for index = 1:5
         end
         % calculate the error
         e = T(index) - y;
-        T_e = T_e + abs(e);
+        % calculate the total error
+        Terr = Terr + abs(e);
 end
 
-% write training algorithm
+%% Write training algorithm
+n = 0.1;
 Iteracija = 0;
-while T_e ~= 0 % executes while the total error is not 0
-    T_e = 0;
+while Terr ~= 0 % executes while the total error is not 0
+    Terr = 0;
     for index = 1:5
         v = x1(index)*w1 + x2(index)*w2 + b;
         % calculate current output of perceptron
@@ -115,13 +117,31 @@ while T_e ~= 0 % executes while the total error is not 0
         % update parameters
         w1 = w1 + n*e*x1(index);
         w2 = w2 + n*e*x2(index);
-        b = b + n*e*1;
+        b = b + n*e;
         % calculate the total error
-        T_e = T_e + abs(e);
+        Terr = Terr + abs(e);
         Iteracija = Iteracija + 1;
     end
 end
 disp(['Iteracijos skaicius: ', num2str(Iteracija)]);
+
+%% Testing with training data
+for index = 1:5
+        v = x1(index)*w1 + x2(index)*w2 + b;
+        % calculate current output of the perceptron 
+        if v > 0
+            y = 1;
+        else
+            y = -1;
+        end
+        % calculate the error
+        e = T(index) - y;
+        if e ~= 0
+            disp('Klaidingas klasifikavimas');
+        else
+            disp('Teisingas klasifikavimas');
+        end
+end
 %% Testing with testing data if we have right weights
 X1=[hsv_value_A4 hsv_value_A5 hsv_value_A6 hsv_value_A7 hsv_value_A8 hsv_value_A9 hsv_value_P3 hsv_value_P4];
 X2=[metric_A4 metric_A5 metric_A6 metric_A7 metric_A8 metric_A9 metric_P3 metric_P4];
@@ -138,9 +158,11 @@ for index = 1:8
     % calculate the error value
     e = T_test(index) - y;
     if e ~= 0
-        disp('Nustatyta teisinga klase');
-    else
         disp('Nustatyta neteisinga klase');
+    else
+        disp('Nustatyta teisinga klase');
     end
 end
 
+%% Extra lab. part for 2 pts
+%Naive Bayes Classifier
