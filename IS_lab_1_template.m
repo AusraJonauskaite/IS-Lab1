@@ -34,7 +34,8 @@ metric_A3=apvalumas_roundness(A3); %roundness
 % 4th apple image(A4)
 hsv_value_A4=spalva_color(A4); %color
 metric_A4=apvalumas_roundness(A4); %roundness
-% 5th apple image(A5)hsv_value_A5=spalva_color(A5); %color
+% 5th apple image(A5)
+hsv_value_A5=spalva_color(A5); %color
 metric_A5=apvalumas_roundness(A5); %roundness
 % 6th apple image(A6)
 hsv_value_A6=spalva_color(A6); %color
@@ -98,26 +99,48 @@ for index = 1:5
 end
 
 % write training algorithm
-while e ~= 0 % executes while the total error is not 0
-	% here should be your code of parameter update
-%   calculate output for current example
-% 
-%   calculate error for current example
-% 
-%   update parameters using current inputs ant current error
-% 	w1 = 
-%   w2 = 
-%   b = 
-% 
-%   Test how good are updated parameters (weights) on all examples used for training
-%   calculate outputs and errors for all 5 examples using current values of the parameter set {w1, w2, b}
-%   calculate 'v1', 'v2', 'v3',... 'v5'
-% 
-%   calculate 'y1', ..., 'y5'
-%     
-%   calculate 'e1', ... 'e5'
-    
-	% calculate the total error for these 5 inputs 
-	e = abs(e1) + abs(e2) + abs(e3) + abs(e4) + abs(e5);
+Iteracija = 0;
+while T_e ~= 0 % executes while the total error is not 0
+    T_e = 0;
+    for index = 1:5
+        v = x1(index)*w1 + x2(index)*w2 + b;
+        % calculate current output of perceptron
+        if v > 0
+            y = 1;
+        else
+            y = -1;
+        end 
+        % calculate the error value
+        e = T(index) - y;
+        % update parameters
+        w1 = w1 + n*e*x1(index);
+        w2 = w2 + n*e*x2(index);
+        b = b + n*e*1;
+        % calculate the total error
+        T_e = T_e + abs(e);
+        Iteracija = Iteracija + 1;
+    end
+end
+disp(['Iteracijos skaicius: ', num2str(Iteracija)]);
+%% Testing with testing data if we have right weights
+X1=[hsv_value_A4 hsv_value_A5 hsv_value_A6 hsv_value_A7 hsv_value_A8 hsv_value_A9 hsv_value_P3 hsv_value_P4];
+X2=[metric_A4 metric_A5 metric_A6 metric_A7 metric_A8 metric_A9 metric_P3 metric_P4];
+%Desired output vector
+T_test=[1;1;1;1;1;1;-1;-1];
+for index = 1:8
+     v = X1(index)*w1 + X2(index)*w2 + b;
+    % calculate current output of perceptron
+    if v > 0
+        y = 1;
+    else
+        y = -1;
+    end 
+    % calculate the error value
+    e = T_test(index) - y;
+    if e ~= 0
+        disp('Nustatyta teisinga klase');
+    else
+        disp('Nustatyta neteisinga klase');
+    end
 end
 

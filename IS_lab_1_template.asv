@@ -82,7 +82,7 @@ b = randn(1);
 n = 0.1;
 T_e = 0;
 
-%Create cicle for all inputs to 
+%Create cycle for all 5 inputs to 
 %calculate weighted sum with randomly generated parameters
 for index = 1:5
         v = x1(index)*w1 + x2(index)*w2 + b;
@@ -97,4 +97,23 @@ for index = 1:5
         T_e = T_e + abs(e);
 end
 
+% write training algorithm
+
+while e ~= 0 % executes while the total error is not 0
+    e = 0;
+ 	w1 = w1 + n*e*x1(index);
+    w2 = w2 + n*e*x2(index);
+    b = b + n*e*1;
+% 
+%   Test how good are updated parameters (weights) on all examples used for training
+%   calculate outputs and errors for all 5 examples using current values of the parameter set {w1, w2, b}
+%   calculate 'v1', 'v2', 'v3',... 'v5'
+% 
+%   calculate 'y1', ..., 'y5'
+%     
+%   calculate 'e1', ... 'e5'
+    
+	% calculate the total error for these 5 inputs 
+	e = abs(e1) + abs(e2) + abs(e3) + abs(e4) + abs(e5);
+end
 
