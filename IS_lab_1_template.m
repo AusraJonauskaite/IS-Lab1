@@ -1,5 +1,6 @@
-% Classification using perceptron
+%For this lab. you need to have Image Processing Toolbox.
 
+%Classification using perceptron
 % Reading apple images
 A1=imread('apple_04.jpg');
 A2=imread('apple_05.jpg');
