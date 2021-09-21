@@ -120,8 +120,8 @@ while Terr ~= 0 % executes while the total error is not 0
         b = b + n*e;
         % calculate the total error
         Terr = Terr + abs(e);
-        Iteracija = Iteracija + 1;
     end
+    Iteracija = Iteracija + 1;
 end
 disp(['Iteracijos skaicius: ', num2str(Iteracija)]);
 
