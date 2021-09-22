@@ -147,6 +147,7 @@ X1=[hsv_value_A4 hsv_value_A5 hsv_value_A6 hsv_value_A7 hsv_value_A8 hsv_value_A
 X2=[metric_A4 metric_A5 metric_A6 metric_A7 metric_A8 metric_A9 metric_P3 metric_P4];
 %Desired output vector
 T_test=[1;1;1;1;1;1;-1;-1];
+disp('Testavimo su naujais duomenim, rezultatai: ');
 for index = 1:8
      v = X1(index)*w1 + X2(index)*w2 + b;
     % calculate current output of perceptron
@@ -166,3 +167,6 @@ end
 
 %% Extra lab. part for 2 pts
 %Naive Bayes Classifier
+%class = {apple, pear}
+%feature = {color, roundness}
+
