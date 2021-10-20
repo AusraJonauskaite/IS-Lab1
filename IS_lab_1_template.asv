@@ -114,13 +114,11 @@ while Terr ~= 0 % executes while the total error is not 0
     for index = 1:5
         v = x1(index)*w1 + x2(index)*w2 + b;
         % calculate current output of perceptron
-        %6. Persakiciuojami y
         if v > 0
             y = 1;
         else
             y = -1;
         end 
-        %7.Skaiciuojama klaida
         % calculate the error value
         e = T(index) - y;
         %5. Atnaujinamo parametrai
@@ -144,7 +142,6 @@ for index = 1:5
         else
             y = -1;
         end
-        %8. Tikriname ar teisingas klasifikavimas
         % calculate the error
         e = T(index) - y;
         if e ~= 0
@@ -155,7 +152,6 @@ for index = 1:5
 end
 %% Testing with testing data if we have right weights
 disp('Testavimo su naujais duomenim, rezultatai: ');
-%9.Tikriname testavimo duomenis
 for index = 1:8
      v = X1(index)*w1 + X2(index)*w2 + b;
     % calculate current output of perceptron
